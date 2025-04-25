@@ -1,0 +1,24 @@
+[base]
+
+# If "true", will not apply changes and will only display the information.
+display_only=false
+
+# If "false", will not update the author.
+replace_author=true
+
+# If removed or commented, will use the parent's folder name to add "[name of author]" 
+# in front of the file name.
+# You can also specify the author name yourself.
+author=""
+
+# If "true", will overwrite every tags (except "SFX") with the content of add_tags.
+# To force remove the "SFX" tag, add "NoSFX" in add_tags.
+replace_tags=false
+
+# List of tags to add or replace by, for exemple add_tags=["animation", "creampie"]
+add_tags=[]
+
+# If set to "false", will treat subfolders as a scene collection and assign each 
+# subfolder the author name and the total play time of a subfolder's scenes. 
+# Individual scenes will still have their own info.
+no_subfolder=true
