@@ -1,6 +1,6 @@
 # KK Scene Timeline Info
 
-**KK Scene Timeline Info** is a script designed to add timeline information to file names. It provides configurable options to customize how file names are updated, including adding author names, replacing tags, and handling subfolders.
+**KK Scene Timeline Info** is a console executable designed to add timeline information to a scene's file name. It provides configurable options to customize how file names are updated, including adding author names, replacing tags, and handling subfolders.
 
 ## Features
 - Add timeline information to file names.

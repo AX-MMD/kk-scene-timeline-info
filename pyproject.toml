@@ -1,7 +1,7 @@
 [project]
 name = "kk_scene_timeline_info"
 version = "0.1.0"
-description = "Script to add timeline info to file name"
+description = "Console executable to add timeline info to a scene's file name"
 authors = [
     {name = "AX-MMD",email = "ax.mmd.yt@gmail.com"}
 ]
