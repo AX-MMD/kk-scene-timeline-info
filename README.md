@@ -20,9 +20,9 @@ The script behaviour can be customized using the `config.toml` file. Below are t
   Default: `false`
 
 - **`author`**:  
-  Specify an author name to add to file names. 
-  If left empty, it will not add an author name.
-  If removed completely or commented out, it will use the parent folder's name.
+  Specify an author name to add to file names.  
+  If left empty, it will not add an author name.  
+  If removed completely or commented out, it will use the parent folder's name.  
   Default: `""`
 
 - **`replace_author`**:  
@@ -30,7 +30,8 @@ The script behaviour can be customized using the `config.toml` file. Below are t
   Default: `true`
 
 - **`replace_tags`**:  
-  If `true`, all tags (except `SFX`) will be replaced (instead of updated) with the content of `add_tags`. To force remove the `SFX` tag, add `NoSFX` to `add_tags`.  
+  If `true`, all tags (except `SFX`) will be replaced (instead of updated) with the content of `add_tags`.  
+  To force remove the `SFX` tag, add `NoSFX` to `add_tags`.  
   Default: `false`
 
 - **`add_tags`**:  
@@ -38,7 +39,8 @@ The script behaviour can be customized using the `config.toml` file. Below are t
   Default: `[]`
 
 - **`no_subfolder`**:  
-  If `false`, subfolders will be treated as scene collections, and each subfolder will be assigned the author name and the total playtime of its scenes. Individual scenes will still have their own information.  
+  If `false`, subfolders will be treated as scene collections, and each subfolder will be assigned the author name and the total duration.  
+  Individual scenes will still have their own information.  
   Default: `true`
 
 ## Installation
