@@ -12,6 +12,13 @@
 ## Limitations
 - I haven't found a way to detect when preset Studio animations are used, so if a scene does not animate in Timeline and only uses presets, it will be treated as static.
 
+## Installation
+- Download `KKSceneTimelineInfo.zip` from the [release page](https://github.com/AX-MMD/kk-scene-timeline-info/releases/)
+- Extract wherever you want, but keep all the files together.
+
+## Usage
+- Drag and drop a scene file or folder on `KKSceneTimelineInfo.bat`
+
 ## Configuration
 The script behaviour can be customized using the `config.toml` file. Below are the available options:
 
@@ -42,5 +49,3 @@ The script behaviour can be customized using the `config.toml` file. Below are t
   If `false`, subfolders will be treated as scene collections, and each subfolder will be assigned the author name and the total duration.  
   Individual scenes will still have their own information.  
   Default: `true`
-
-## Installation
