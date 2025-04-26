@@ -10,7 +10,7 @@
 - Optional: Handle subfolders as scene collections with aggregated information.
 
 ## Limitations
-- I haven't found a way to detect when preset Studio animations are used, so if a scene does not animate in Timeline and only uses preset Studio animations, it will be treated as static.
+- I haven't found a way to detect when preset Studio animations are used, so if a scene does not animate in Timeline and only uses presets, it will be treated as static.
 
 ## Configuration
 The script behaviour can be customized using the `config.toml` file. Below are the available options:
