@@ -17,6 +17,10 @@ ruff = "^0.9.3"
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.4"
 
+[tool.poetry.group.release.dependencies]
+pyinstaller = "^6.11.1"
+cx-freeze = "^8.0.0"
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
@@ -27,3 +31,18 @@ line-length = 90
 [tool.ruff.lint]
 select = ["I", "F", "E", "W"]
 ignore = ["E203", "F811", "E501", "E266"]
+
+[tool.cxfreeze.build_exe]
+excludes = [
+    "unittest", "email", "http", "tcl", "ssl", "socket", "ftplib", "tkinter",
+    "logging", "html", "sqlite3", "asyncio", "pydoc",
+    "bz2", "multiprocessing", "concurrent",
+]
+packages = ["os"]
+build_exe = "_dist/bin"
+include_msvcr = "True"
+
+[tool.cxfreeze]
+executables = [
+    {script = "src/main.py", base = "console", target_name = "KKSceneTimelineInfo.exe"}
+]

@@ -1,10 +1,23 @@
 import os
 import sys
 import traceback
-from kk_scene_timeline_info import SceneTimelineInfoManager, Config, load_config_file, settings
+
+from kk_scene_timeline_info import (
+    Config,
+    SceneTimelineInfoManager,
+    load_config_file,
+    settings,
+)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
+        path = input("Please enter the path to the folder or scene file:\n> ")
+        if not path:
+            input("No path provided.")
+            sys.exit(1)
+        elif path[0] == '&':
+            path = path[3:-1]
+    elif len(sys.argv) != 2:
         print("Usages: " +\
              "\nSet the author of the files in the folder to the folder's name" +
              "\n> python script.py <folder_path>" +
@@ -12,19 +25,25 @@ if __name__ == "__main__":
              "\n> python script.py <file_path>")
         input()
         sys.exit(1)
-    
-    path = sys.argv[1]
-    config: Config = load_config_file(settings.CONFIG_PATH)
+    else:
+        path = sys.argv[1]
 
-    if config.display_only:
-        print("### DISPLAY ONLY MODE IS ENABLED ###")
-    
+    path = path.replace("\\", "/").replace("'", "").replace('"', "").strip()
+
     try:
+        config: Config = load_config_file(settings.CONFIG_PATH)
+
+        if config.display_only:
+            print("### DISPLAY ONLY MODE IS ENABLED ###")
+
         if os.path.isdir(path):
             SceneTimelineInfoManager(config=config).add_info_to_dir_files(path)
         else:
             SceneTimelineInfoManager(config=config).add_info_to_file(path)
-    except Exception as e:
+
+        if config.display_only:
+            print("### DISPLAY ONLY MODE, NO FILES CHANGED ###")
+    except Exception:
         traceback.print_exc()
     finally:
         input("Press Enter to exit...")
