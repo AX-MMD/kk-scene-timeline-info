@@ -55,9 +55,11 @@ The script behaviour can be customized using the `config.toml` file. Below are t
   If `false`, subfolders will be treated as scene collections, and each subfolder will be assigned the author name and the total duration.
 
   .
+  
   .
+  
   .
-  .
+
   .
 # コイカツシーン[Timeline]情報 
 
