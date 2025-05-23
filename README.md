@@ -15,7 +15,7 @@
 - I haven't found a way to detect when preset Studio animations are used, so if a scene does not animate in Timeline and only uses presets, it will be treated as static.
 
 ## Installation
-- Download `KKSceneTimelineInfo.zip` from the [release page](https://github.com/AX-MMD/kk-scene-timeline-info/releases/)
+- Download `KKSceneTimelineInfo.xxx.zip` from the [release page](https://github.com/AX-MMD/kk-scene-timeline-info/releases/)
 - Extract wherever you want, but keep all the files together.
 
 ## Usage
@@ -78,7 +78,7 @@ The script behaviour can be customized using the `config.toml` file. Below are t
 - プリセットスタジオのアニメーションが使用されていることを検出する方法が見つかりませんでした。そのため、シーンがタイムラインでアニメーションせず、プリセットだけが使用されている場合、静的なものとして扱われます。
 
 ## インストール
-- [リリースページから](https://github.com/AX-MMD/kk-scene-timeline-info/releases) `KKSceneTimelineInfo.zip` をダウンロードしてください。
+- [リリースページから](https://github.com/AX-MMD/kk-scene-timeline-info/releases) `KKSceneTimelineInfo.xxx.zip` をダウンロードしてください。
 - 好きな場所に解凍してください。
 
 ## 使用方法
