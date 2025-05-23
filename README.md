@@ -76,8 +76,7 @@ The script behaviour can be customized using the `config.toml` file. Below are t
 - プリセットスタジオのアニメーションが使用されていることを検出する方法が見つかりませんでした。そのため、シーンがタイムラインでアニメーションせず、プリセットだけが使用されている場合、静的なものとして扱われます。
 
 ## インストール
-- リリースページから `KKSceneTimelineInfo.zip` をダウンロードしてください。
--> https://github.com/AX-MMD/kk-scene-timeline-info/releases
+- [リリースページから](https://github.com/AX-MMD/kk-scene-timeline-info/releases) `KKSceneTimelineInfo.zip` をダウンロードしてください。
 - 好きな場所に解凍してください。
 
 ## 使用方法
@@ -117,6 +116,3 @@ The script behaviour can be customized using the `config.toml` file. Below are t
   false`の場合、サブフォルダはシーンコレクションとして扱われ、各サブフォルダには作者名と合計時間が割り当てられます。 
   個々のシーンはそれぞれの情報を持ちます。 
   デフォルト: `true`
-
-  Individual scenes will still have their own information.  
-  Default: `true`
