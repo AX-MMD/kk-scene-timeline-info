@@ -53,6 +53,8 @@ The script behaviour can be customized using the `config.toml` file. Below are t
 
 - **`no_subfolder`**:  
   If `false`, subfolders will be treated as scene collections, and each subfolder will be assigned the author name and the total duration.
+  Individual scenes will still have their own information.  
+  Default: `true`
 
   .
   
