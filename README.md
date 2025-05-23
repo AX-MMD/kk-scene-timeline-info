@@ -1,4 +1,4 @@
-[DeepL翻訳 日本語](https://github.com/AX-MMD/kk-scene-timeline-info#コイカツ[Timeline]シーン情報)
+[DeepL翻訳 日本語](https://github.com/AX-MMD/kk-scene-timeline-info#コイカツシーンtimeline情報)
 
 # KK Scene Timeline Info
 
