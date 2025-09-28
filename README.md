@@ -8,7 +8,7 @@
 - Add timeline information to file names.
 - Add `SFX` tag to the file name of scenes that include sounds (experimental).
 - Add custom tags to the file name.
-- Optional: Prepend the file name with an `[author name]`.
+- Optional: Prepend the file name with `[author name]`.
 - Optional: Handle subfolders as scene collections with aggregated information.
 
 ## Limitations
@@ -52,7 +52,7 @@ The script behaviour can be customized using the `config.toml` file. Below are t
   Default: `[]`
 
 - **`no_subfolder`**:  
-  If `false`, subfolders will be treated as scene collections, and each subfolder will be assigned the author name and the total duration.
+  If `false`, subfolders will also be processed. They are treated as scene collections and each subfolder will be assigned the total duration of its content.
   Individual scenes will still have their own information.  
   Default: `true`
 

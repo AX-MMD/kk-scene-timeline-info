@@ -35,17 +35,10 @@ class SceneTimelineInfoManager:
         parent_path, name = os.path.split(folder_path)
         name, author, old_duration_str, tags = self._extract_name_info(name)
 
-        if self.config.replace_author is not False:
-            if self.config.author is None:
-                author = folder_name or author
-            else:
-                author = self.config.author
+        if old_duration_str == duration_str:
+            return folder_name  # No change needed
 
-        if not author:
-            new_folder_name = f"{name} ({duration_str})"
-        else:
-            new_folder_name = f"[{author}] {name} ({duration_str})"
-
+        new_folder_name = f"{name} ({duration_str})"
         new_folder_path = os.path.join(parent_path, new_folder_name)
 
         # Rename the folder
@@ -54,7 +47,7 @@ class SceneTimelineInfoManager:
         print(f"'{name}' -> '{new_folder_name}'")
         return new_folder_name
 
-    def _rename_file(self, folder_path: str, folder_name: str, filename: str):
+    def _rename_file(self, folder_path: str, folder_name: str, filename: str) -> typing.Tuple[str, str, float]:
         file_path = os.path.join(folder_path, filename)
         scene_data = SceneData(file_path)
         image_type, sfx_status, duration = scene_data.get_timeline_info()
@@ -105,7 +98,26 @@ class SceneTimelineInfoManager:
 
         # Rename the file
         if not self.config.display_only:
-            os.rename(file_path, os.path.join(folder_path, new_filename))
+            try:
+                os.rename(file_path, os.path.join(folder_path, new_filename))
+            except FileExistsError:
+                # Handle file name conflict
+                u_input = input(f"File '{new_filename}' already exists:\n- [c] copy: Add '_Copy' suffix\n- [s] skip: Skip this file\n- [r] replace: Replace existing file\n- [q] quit: Abort the operation\nYour choice (c/s/r/q): ").strip().lower()
+                while u_input not in ("copy", "skip", "replace", "quit", "c", "s", "r", "q"):
+                    u_input = input("Invalid choice. Please enter copy/skip/replace/quit or their shortcut: ").strip().lower()
+
+                if u_input in ("copy", "c"):
+                    new_filename = f"{os.path.splitext(new_filename)[0]}_Copy{ext}"
+                elif u_input in ("replace", "r"):
+                    os.remove(os.path.join(folder_path, new_filename))
+                elif u_input in ("quit", "q"):
+                    raise KeyboardInterrupt("Operation aborted by user.")
+                else:
+                    print(f"Skipping '{filename}'")
+                    return filename, image_type, 0.0
+
+                os.rename(file_path, os.path.join(folder_path, new_filename))
+
         print(f"'{filename}' -> '{new_filename}'")
         return new_filename, image_type, duration
 
@@ -118,24 +130,31 @@ class SceneTimelineInfoManager:
         filename = os.path.basename(file_path)
         self._rename_file(folder_path, folder_name, filename)
 
-    def add_info_to_dir_files(self, folder_path, author_name=None):
+    def add_info_to_dir_files(self, folder_path, author_name=None) -> float:
         # Get the folder name
         folder_name = author_name if author_name else os.path.basename(folder_path)
         if folder_name[0] == "[" and folder_name[-1] == "]":
             folder_name = folder_name[1:-1]
 
-        # Iterate over all files in the folder
+        # Total duration of content in the folder
+        tot_duration: float = 0.0
+
+        # Iterate over all files and folders in the folder
         for filename in os.listdir(folder_path):
             file_path = os.path.join(folder_path, filename)
             if os.path.isfile(file_path):
                 try:
-                    self._rename_file(folder_path, folder_name, filename)
+                    _, _, duration = self._rename_file(folder_path, folder_name, filename)
+                    if duration:
+                        tot_duration += duration
                 except SceneData.ContentError as e:
                     print(f"Skipping' {filename}': {e}")
                 except SceneData.MemoryError as e:
                     print(f"Skipping '{filename}': {e}")
             elif os.path.isdir(file_path) and not self.config.no_subfolder:
-                tot_duration = 0
+                # Recursively process subfolders and accumulate their durations
+                subfolder_duration: float = 0.0
+
                 for sub_filename in os.listdir(file_path):
                     sub_file_path = os.path.join(file_path, sub_filename)
                     if os.path.isfile(sub_file_path):
@@ -144,15 +163,25 @@ class SceneTimelineInfoManager:
                                 file_path, folder_name, sub_filename
                             )
                             if img_type != "dynamic" and duration:
-                                tot_duration += duration
+                                subfolder_duration += duration
                         except SceneData.MemoryError as e:
                             print(f"Skipping '{sub_filename}': {e}")
                         except SceneData.ContentError as e:
                             print(f"Skipping' {sub_filename}': {e}")
-                if tot_duration:
-                    duration_str = (
-                        f"{int(tot_duration // 60)}m{int(tot_duration % 60):02}"
-                    )
-                    self._rename_folder(file_path, folder_name, duration_str)
+                    elif os.path.isdir(sub_file_path):
+                        # Recursively process and add duration from subfolders
+                        subfolder_duration += self.add_info_to_dir_files(
+                            sub_file_path, folder_name
+                        )
+
+                if subfolder_duration:
+                    duration_str = f"{int(subfolder_duration // 60)}m{int(subfolder_duration % 60):02}"
+                    tot_duration += subfolder_duration
+                else:
+                    duration_str = "static"
+
+                self._rename_folder(file_path, folder_name, duration_str)
             else:
                 print(f"Skipping subfolder'{filename}', 'no_subfolder' flag is set")
+
+        return tot_duration

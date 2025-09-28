@@ -19,6 +19,6 @@ replace_tags=false
 add_tags=[]
 
 # If set to "false", will treat subfolders as a scene collection and assign each 
-# subfolder the author name and the total play time of a subfolder's scenes. 
+# subfolder the total play time of a subfolder's scenes. 
 # Individual scenes will still have their own info.
 no_subfolder=true
