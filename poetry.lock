@@ -718,4 +718,4 @@ markers = {lint = "platform_machine == \"x86_64\" or platform_machine == \"i686\
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "75d9ee0aaa7fb0e16c43e87f0d2aa927204a5cf8e080952427d2f5bdf8658cd1"
+content-hash = "873bf191a3d52c622d4291a87aebac5e33c87d4009190af1b827a40625e790ca"
