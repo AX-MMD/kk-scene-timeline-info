@@ -5,40 +5,37 @@ mypylint = mypy $(project_path) --ignore-missing-imports --no-warn-unused-ignore
 
 .PHONY: pretty
 pretty:
-	ruff format $(project_path)
+    ruff format $(project_path)
 
 .PHONY: format
 format:
-	ruff format $(project_path)
-	ruff check --fix
-	$(mypylint)
+    ruff format $(project_path)
+    ruff check --fix
+    $(mypylint)
 
 .PHONY: lint
 lint:
-	ruff check
-	$(mypylint)
+    ruff check
+    $(mypylint)
 
 .PHONY: test
 test:
-	pytest $(project_path)
+    pytest $(project_path)
 
 .PHONY: run
 run:
-	python $(src_path)/main.py
+    python $(src_path)/main.py
 
 .PHONY: bin
 bin:
-    pyinstaller run_gui.spec
-	rm -rf ./dist
-	mkdir -p ./dist
-    mv -f ./dist/KoikatsuPlapGenerator.exe $(src_path)/bin/KoikatsuPlapGenerator.exe
-    rsync -a --remove-source-files ./dist/__internal__/ $(src_path)/bin/__internal__/
-    rm -rf ./dist/__internal__
+    cxfreeze build
 
 .PHONY: release
-release: lint test bin
+release:
+    $(MAKE) lint
+    $(MAKE) test
+    $(MAKE) bin
     python $(src_path)/make_release.py
 
 .PHONY: all
-
 all: lint test

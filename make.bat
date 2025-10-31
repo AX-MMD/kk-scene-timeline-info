@@ -45,19 +45,11 @@ GOTO error
 	GOTO :EOF
 
 :bin
-	@REM pyinstaller run_gui.spec
 	cxfreeze build
-	IF EXIST %src_path%\bin\ (
-		DEL /Q %src_path%\bin\*
-	)
-	MD %src_path%\bin
-	@REM move /Y dist\KoikatsuPlapGenerator.exe %src_path%\bin\KoikatsuPlapGenerator.exe
-	@REM robocopy dist\_internal %src_path%\bin\__internal__ /MOVE /E /NFL /NDL
 	IF %from_release%==1 (
 		SET from_bin=1
 		GOTO release
-	)
-	ELSE (
+	) ELSE (
 		GOTO :EOF
 	)
 
