@@ -228,9 +228,9 @@ class SceneTimelineInfoManager:
                     if duration:
                         tot_duration += duration
                 except SceneData.ContentError as e:
-                    print(f"Error:: '{filename}': {e}")
+                    print(f"Warning:: '{filename}': {e}")
                 except SceneData.MemoryError as e:
-                    print(f"Error:: '{filename}': {e}")
+                    print(f"Warning:: '{filename}': {e}")
             elif os.path.isdir(file_path) and not self.config.no_subfolder:
                 # Recursively process subfolders and accumulate their durations
                 subfolder_duration: float = 0.0
@@ -245,9 +245,9 @@ class SceneTimelineInfoManager:
                             if img_type != "dynamic" and duration:
                                 subfolder_duration += duration
                         except SceneData.MemoryError as e:
-                            print(f"Error:: '{sub_filename}': {e}")
+                            print(f"Warning:: '{sub_filename}': {e}")
                         except SceneData.ContentError as e:
-                            print(f"Error:: '{sub_filename}': {e}")
+                            print(f"Warning:: '{sub_filename}': {e}")
                     elif os.path.isdir(sub_file_path):
                         # Recursively process and add duration from subfolders
                         subfolder_duration += self.add_info_to_dir_files(
