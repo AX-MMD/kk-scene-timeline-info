@@ -9,7 +9,7 @@ replace_author=false
 # If removed or commented, will use the parent's folder name to add "[name of author]" 
 # in front of the file name.
 # You can also specify the author name yourself.
-#author=""
+author=""
 
 # If "true", will overwrite every tags (except "SFX") with the content of add_tags.
 # To force remove the "SFX" tag, add "NoSFX" in add_tags.
