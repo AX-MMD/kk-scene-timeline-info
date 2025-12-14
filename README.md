@@ -40,7 +40,7 @@ The script behaviour can be customized using the `config.toml` file. Below are t
 
 - **`replace_author`**:  
   If `false`, the script will not update the author in file names.  
-  Default: `true`
+  Default: `false`
 
 - **`replace_tags`**:  
   If `true`, all tags (except `SFX`) will be replaced (instead of updated) with the content of `add_tags`.  
@@ -103,7 +103,7 @@ The script behaviour can be customized using the `config.toml` file. Below are t
 
 - **`replace_author`**：  
   false`の場合、スクリプトはファイル名の作者を更新しません。 
-  デフォルト: `true`
+  デフォルト: `false`
 
 - **`replace_tags`**：  
   もし `true` なら、全てのタグ(`SFX` を除く)を `add_tags` の内容に置き換える(更新するのではなく)。 
